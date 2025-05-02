@@ -13,3 +13,15 @@ config_version=5
 config/name="GodotNetworkingTests"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+Server="*res://singletons/Server.gd"
+
+[file_customization]
+
+folder_colors={
+"res://resources/": "yellow",
+"res://scenes/": "green",
+"res://singletons/": "pink"
+}
