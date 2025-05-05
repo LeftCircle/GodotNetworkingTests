@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://nr8vpsd1mutt"]
+
+[ext_resource type="Script" uid="uid://b5f05gap5wojm" path="res://singletons/world.gd" id="1_qperq"]
+
+[node name="World" type="Node" node_paths=PackedStringArray("level")]
+script = ExtResource("1_qperq")
+level = NodePath("Level")
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://cevbyrayng8cx")
+spawn_path = NodePath("../Level")
+spawn_limit = 1
+
+[node name="Level" type="Node" parent="."]

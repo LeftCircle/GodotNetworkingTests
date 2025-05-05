@@ -16,7 +16,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Server="*res://singletons/Server.gd"
+Server="*res://singletons/Server.tscn"
+World="*res://singletons/World.tscn"
 
 [file_customization]
 

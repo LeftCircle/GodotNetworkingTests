@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=3 uid="uid://cevbyrayng8cx"]
+
+[ext_resource type="Shader" uid="uid://b2xijj8ike471" path="res://resources/shaders/test_grid.gdshader" id="1_pglk6"]
+[ext_resource type="PackedScene" uid="uid://pttri4hlsm84" path="res://scenes/characters/Car.tscn" id="2_sytxv"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_3lko4"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pglk6"]
+size = Vector2(20, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sytxv"]
+render_priority = 0
+shader = ExtResource("1_pglk6")
+shader_parameter/subdivisions = 32.0
+shader_parameter/grid_width = 0.02
+shader_parameter/background_color = Color(0.2, 0.2, 0.2, 1)
+shader_parameter/background_color_two = Color(0.1, 0.1, 0.1, 1)
+shader_parameter/grid_color = Color(0.5, 0.5, 0.5, 1)
+shader_parameter/dashed_scale_x = 0.02
+shader_parameter/dashed_scale_y = 0.02
+shader_parameter/dashed_count_x = 1.0
+shader_parameter/dashed_count_y = 1.0
+shader_parameter/point_width = 0.021
+shader_parameter/point_color = Color(0, 0, 0, 1)
+shader_parameter/point_scale_x = 0.05
+shader_parameter/point_scale_y = 0.05
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_subdivisions = 6.0
+shader_parameter/inside_color = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/in_dashed_scale_x = 0.3
+shader_parameter/in_dashed_scale_y = 0.3
+shader_parameter/in_dashed_count_x = 6.0
+shader_parameter/in_dashed_count_y = 6.0
+
+[node name="Default" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_3lko4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_pglk6")
+surface_material_override/0 = SubResource("ShaderMaterial_sytxv")
+
+[node name="Players" type="Node3D" parent="."]
+
+[node name="Objects" type="Node3D" parent="."]
+
+[node name="Car" parent="Objects" instance=ExtResource("2_sytxv")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.73733, 0, 3.84882)
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("uid://ce3hq8vewaump")
+spawn_path = NodePath("../Players")
+spawn_limit = 2

@@ -7,6 +7,10 @@ const PORT = 4433
 # as the core place of communication between the host and the clients when it
 # comes to establishing connections/starting the game/changing scenes.
 
+signal player_connected(network_id)
+signal player_disconnected(network_id)
+
+
 func _ready():
 	get_tree().paused = true
 	# You can save bandwidth by disabling server relay and peer notifications.
@@ -17,7 +21,6 @@ func _ready():
 		print("Automatically starting dedicated server.")
 		_on_host_pressed.call_deferred()
 
-
 func _on_host_pressed():
 	# Start as server.
 	var peer = ENetMultiplayerPeer.new()
@@ -26,6 +29,7 @@ func _on_host_pressed():
 		OS.alert("Failed to start multiplayer server.")
 		return
 	multiplayer.multiplayer_peer = peer
+	_hook_up_connection_signals()
 	start_game()
 
 
@@ -43,6 +47,19 @@ func _on_connect_pressed():
 	multiplayer.multiplayer_peer = peer
 	start_game()
 
+func _hook_up_connection_signals() -> void:
+	# We only need to spawn players on the server.
+	if not multiplayer.is_server():
+		return
+	multiplayer.peer_connected.connect(_on_player_connected_to_host)
+	multiplayer.peer_disconnected.connect(_on_player_disconnected_from_host)
+
+func _on_player_connected_to_host(id : int) -> void:
+	player_connected.emit(id)
+
+func _on_player_disconnected_from_host(id : int) -> void:
+	player_disconnected.emit(id)
+
 func start_game():
 	# Hide the UI and unpause to start the game.
 	$UI.hide()
@@ -50,22 +67,4 @@ func start_game():
 	# Only change level on the server.
 	# Clients will instantiate the level via the spawner.
 	if multiplayer.is_server():
-		change_level.call_deferred(load("res://level.tscn"))
-
-
-# Call this function deferred and only on the main authority (server).
-func change_level(scene: PackedScene):
-	# Remove old level if any.
-	var level = $Level
-	for c in level.get_children():
-		level.remove_child(c)
-		c.queue_free()
-	# Add new level.
-	level.add_child(scene.instantiate())
-
-# The server can restart the level by pressing HOME.
-func _input(event):
-	if not multiplayer.is_server():
-		return
-	if event.is_action("ui_home") and Input.is_action_just_pressed("ui_home"):
-		change_level.call_deferred(load("res://level.tscn"))
+		World.change_level.call_deferred(load(World.starting_level_path))
