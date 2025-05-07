@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cevbyrayng8cx"]
+[gd_scene load_steps=7 format=3 uid="uid://cevbyrayng8cx"]
 
+[ext_resource type="Script" uid="uid://cko15167puu6n" path="res://scenes/levels/default.gd" id="1_8f1tf"]
 [ext_resource type="Shader" uid="uid://b2xijj8ike471" path="res://resources/shaders/test_grid.gdshader" id="1_pglk6"]
 [ext_resource type="PackedScene" uid="uid://pttri4hlsm84" path="res://scenes/characters/Car.tscn" id="2_sytxv"]
 
@@ -33,6 +34,7 @@ shader_parameter/in_dashed_count_x = 6.0
 shader_parameter/in_dashed_count_y = 6.0
 
 [node name="Default" type="Node3D"]
+script = ExtResource("1_8f1tf")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 
