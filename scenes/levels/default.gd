@@ -34,6 +34,7 @@ func _exit_tree():
 
 
 func add_player(id: int):
+	print("Adding player to default level: ", id)
 	var character = preloaded_player.instantiate()
 	# Set player id.
 	character.player = id

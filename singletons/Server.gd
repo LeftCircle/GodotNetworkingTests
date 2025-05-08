@@ -10,7 +10,7 @@ var default_ip = "127.0.0.1"
 
 signal player_connected(network_id)
 signal player_disconnected(network_id)
-
+signal game_start()
 
 func _ready():
 	#get_tree().paused = true
@@ -67,8 +67,8 @@ func _on_player_disconnected_from_host(id : int) -> void:
 
 func start_game():
 	# Hide the UI and unpause to start the game.
-	$UI.hide()
-	get_tree().paused = false
+	#get_tree().paused = false
+	game_start.emit()
 	# Only change level on the server.
 	# Clients will instantiate the level via the spawner.
 	if multiplayer.is_server():

@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmemhlg2rcrys"]
+[gd_scene load_steps=2 format=3 uid="uid://dmemhlg2rcrys"]
 
 [ext_resource type="Script" uid="uid://caxuaa5xgl0qw" path="res://scenes/ui/login_screen.gd" id="1_fw4bc"]
-[ext_resource type="Script" uid="uid://uy3g214g1ocb" path="res://scenes/ui/debug_button.gd" id="2_r4cuc"]
 
 [node name="LoginScreen" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,7 +33,6 @@ text = "Direct:"
 [node name="Host" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 text = "Host"
-script = ExtResource("2_r4cuc")
 
 [node name="Client" type="Button" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
@@ -43,17 +42,6 @@ text = "Client"
 layout_mode = 2
 size_flags_horizontal = 3
 text = "127.0.0.1"
-
-[node name="DebugButton" type="Button" parent="."]
-layout_mode = 2
-offset_left = 546.0
-offset_top = 285.0
-offset_right = 660.0
-offset_bottom = 316.0
-button_mask = 7
-text = "debug button"
-script = ExtResource("2_r4cuc")
-metadata/_custom_type_script = "uid://uy3g214g1ocb"
 
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Host" to="." method="_on_host_pressed"]
 [connection signal="pressed" from="VBoxContainer/HBoxContainer/Client" to="." method="_on_client_pressed"]

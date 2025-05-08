@@ -4,11 +4,6 @@
 
 [node name="Main" type="Node2D"]
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
+[node name="LoginScreen" parent="." instance=ExtResource("1_ig7tw")]
 offset_right = 1152.0
 offset_bottom = 648.0
-
-[node name="LoginScreen" parent="Control" instance=ExtResource("1_ig7tw")]
-layout_mode = 1

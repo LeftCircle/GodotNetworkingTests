@@ -28,6 +28,9 @@ var debug_current_frame_start = 0
 var previous_command_frame : int = -1
 signal command_frame_process(delta, frame_number)
 
+func _physics_process(_delta: float) -> void:
+	execute()
+
 func execute():
 	previous_command_frame = frame
 	#var expected_frame = int((float(Time.get_ticks_msec()) / frame_length_msec)) % MAX_FRAME_NUMBER
@@ -37,17 +40,7 @@ func execute():
 	assert(frame != previous_command_frame)
 	assert(frame <= MAX_FRAME_NUMBER)
 	Logging.log_line("------------------------ COMMAND FRAME " + str(frame) + " ------------------------")
-	#debug_last_frame_start = debug_current_frame_start
-	#debug_current_frame_start = Time.get_ticks_msec()
-	#var td = (debug_current_frame_start - debug_last_frame_start)
-	#Logging.log_line("Frame time = " + str(td))
-	#get_tree().multiplayer.poll()
-	#var poll_funcref = funcref(get_tree().multiplayer, "poll")
-	#FunctionQueue.queue_funcref(poll_funcref, [FunctionQueue.FUNC_IS_VOID])
 
-#func _process(delta):
-#	multiplayer.poll()
-#	pass
 
 func command_frame_greater_than_previous(frame_n : int, previous_frame : int) -> bool:
 	return (((frame_n > previous_frame) and (frame_n - previous_frame <= half_max_frame)) or
