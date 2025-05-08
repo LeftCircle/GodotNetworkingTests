@@ -1,5 +1,6 @@
 extends Node
 const PORT = 4433
+var default_ip = "127.0.0.1"
 
 # This server singleton is present on both the host and clients. It's a very
 # convienent place to put @rpc calls because you don't have to worry about
@@ -19,9 +20,9 @@ func _ready():
 	# Automatically start the server in headless mode.
 	if DisplayServer.get_name() == "headless":
 		print("Automatically starting dedicated server.")
-		_on_host_pressed.call_deferred()
+		on_host_pressed.call_deferred()
 
-func _on_host_pressed():
+func on_host_pressed():
 	# Start as server.
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_server(PORT)
@@ -33,14 +34,18 @@ func _on_host_pressed():
 	start_game()
 
 
-func _on_connect_pressed():
+func on_connect_pressed():
 	# Start as client.
 	var txt : String = $UI/Net/Options/Remote.text
+	var ip : String
 	if txt == "":
-		OS.alert("Need a remote to connect to.")
-		return
+		#OS.alert("Need a remote to connect to.")
+		print("Connecting to default ip", default_ip)
+		ip = default_ip
+	else:
+		ip = txt
 	var peer = ENetMultiplayerPeer.new()
-	peer.create_client(txt, PORT)
+	peer.create_client(ip, PORT)
 	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:
 		OS.alert("Failed to start multiplayer client.")
 		return

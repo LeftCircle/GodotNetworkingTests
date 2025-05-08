@@ -1,10 +1,10 @@
 extends Control
 class_name LoginScreen
 
-
 func _on_host_pressed() -> void:
-	pass # Replace with function body.
+	print("On host pressed")
+	Server.on_host_pressed()
 
 
 func _on_client_pressed() -> void:
-	pass # Replace with function body.
+	Server.on_connect_pressed()
