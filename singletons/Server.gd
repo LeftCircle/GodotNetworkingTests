@@ -13,7 +13,7 @@ signal player_disconnected(network_id)
 
 
 func _ready():
-	get_tree().paused = true
+	#get_tree().paused = true
 	# You can save bandwidth by disabling server relay and peer notifications.
 	#multiplayer.server_relay = false
 
