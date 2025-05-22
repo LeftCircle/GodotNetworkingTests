@@ -20,11 +20,13 @@ func _spawn_players() -> void:
 
 	# Spawn already connected players
 	for id in multiplayer.get_peers():
+		print("Adding already connected ", id)
 		add_player(id)
 
 	# Spawn the local player unless this is a dedicated server export.
 	if not OS.has_feature("dedicated_server"):
-		add_player(1)
+		var id = multiplayer.get_unique_id()
+		add_player(id)
 
 func _exit_tree():
 	if not multiplayer.is_server():

@@ -6,7 +6,7 @@
 script = ExtResource("1_qperq")
 level = NodePath("Level")
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
 _spawnable_scenes = PackedStringArray("uid://cevbyrayng8cx")
 spawn_path = NodePath("../Level")
 spawn_limit = 1

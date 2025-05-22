@@ -8,9 +8,9 @@ func _on_host_pressed() -> void:
 	print("On host pressed")
 	Server.on_host_pressed()
 
-
 func _on_client_pressed() -> void:
-	Server.on_connect_pressed()
+	var ip : String = $VBoxContainer/HBoxContainer/Remote.text
+	Server.on_connect_pressed(ip)
 
 func _on_game_start() -> void:
 	queue_free()

@@ -34,16 +34,8 @@ func on_host_pressed():
 	start_game()
 
 
-func on_connect_pressed():
+func on_connect_pressed(ip : String = default_ip):
 	# Start as client.
-	var txt : String = $UI/Net/Options/Remote.text
-	var ip : String
-	if txt == "":
-		#OS.alert("Need a remote to connect to.")
-		print("Connecting to default ip", default_ip)
-		ip = default_ip
-	else:
-		ip = txt
 	var peer = ENetMultiplayerPeer.new()
 	peer.create_client(ip, PORT)
 	if peer.get_connection_status() == MultiplayerPeer.CONNECTION_DISCONNECTED:

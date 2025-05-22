@@ -56,3 +56,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.73733, 0, 3.84882)
 _spawnable_scenes = PackedStringArray("uid://ce3hq8vewaump")
 spawn_path = NodePath("../Players")
 spawn_limit = 2
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.817044, 0.576575, 0, -0.576575, 0.817044, 0, 3.98953, 7.68527)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_energy = 10.0
+omni_range = 19.223

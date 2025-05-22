@@ -9,8 +9,8 @@ func change_level(scene: PackedScene):
 	if not multiplayer.is_server():
 		return
 	# Remove old level if any.
-	for c in World.get_children():
-		World.level.remove_child(c)
+	for c in level.get_children():
+		level.remove_child(c)
 		c.queue_free()
 	# Add new level.
 	level.add_child(scene.instantiate())

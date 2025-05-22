@@ -1,4 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://pttri4hlsm84"]
+[gd_scene load_steps=7 format=3 uid="uid://pttri4hlsm84"]
+
+[ext_resource type="Script" uid="uid://dm7r54h7qtyj" path="res://scenes/characters/car.gd" id="1_hxkb1"]
+[ext_resource type="Script" uid="uid://ii7g8mr8fddg" path="res://scenes/components/interactable_area.gd" id="2_3vh5o"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_lo4kp"]
 size = Vector3(1, 1, 2.5)
@@ -8,7 +11,11 @@ size = Vector3(1, 1, 2.5)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lo4kp"]
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_lo4kp"]
+radius = 2.474
+
 [node name="Car" type="CharacterBody3D"]
+script = ExtResource("1_hxkb1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -20,3 +27,16 @@ shape = SubResource("BoxShape3D_lo4kp")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_lo4kp")
+
+[node name="SeatA" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04641, -0.738526)
+
+[node name="SeatB" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04641, 0.713769)
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("2_3vh5o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.730727, 0)
+shape = SubResource("SphereShape3D_lo4kp")
