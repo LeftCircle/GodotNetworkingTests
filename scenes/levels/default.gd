@@ -45,9 +45,12 @@ func add_player(id: int):
 	character.position = Vector3(pos.x * SPAWN_RANDOM * randf(), 0, pos.y * SPAWN_RANDOM * randf())
 	character.name = str(id)
 	$Players.add_child(character, true)
+	Server.track_player(character)
 
 
 func del_player(id: int):
 	if not $Players.has_node(str(id)):
 		return
-	$Players.get_node(str(id)).queue_free()
+	var player = $Players.get_node(str(id))
+	player.queue_free()
+	Server.stop_tracking_player(player)

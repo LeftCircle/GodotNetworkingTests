@@ -10,12 +10,27 @@ size = Vector3(1, 1, 2.5)
 size = Vector3(1, 1, 2.5)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_lo4kp"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:velocity")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:driver")
+properties/2/spawn = true
+properties/2/replication_mode = 0
+properties/3/path = NodePath(".:passenger")
+properties/3/spawn = true
+properties/3/replication_mode = 0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_lo4kp"]
 radius = 2.474
 
 [node name="Car" type="CharacterBody3D"]
 script = ExtResource("1_hxkb1")
+seat_a_path = NodePath("SeatA")
+seat_b_path = NodePath("SeatB")
+interactable_area_path = NodePath("Area3D")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)

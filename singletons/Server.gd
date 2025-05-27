@@ -12,6 +12,8 @@ signal player_connected(network_id)
 signal player_disconnected(network_id)
 signal game_start()
 
+var player_id_to_node = {}
+
 func _ready():
 	#get_tree().paused = true
 	# You can save bandwidth by disabling server relay and peer notifications.
@@ -65,3 +67,11 @@ func start_game():
 	# Clients will instantiate the level via the spawner.
 	if multiplayer.is_server():
 		World.change_level.call_deferred(load(World.starting_level_path))
+
+func track_player(player : Player) -> void:
+	player_id_to_node[player.player] = player
+	print("Started tracking player ", player.player)
+
+func stop_tracking_player(player : Player) -> void:
+	player_id_to_node.erase(player.player)
+	print("Stopped tracking player ", player.player)

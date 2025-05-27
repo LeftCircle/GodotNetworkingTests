@@ -19,11 +19,13 @@ func _ready():
 func jump():
 	jumping = true
 
+@rpc("call_local", "reliable")
+func interact_pressed() -> void:
+	interact = true
+
 func _process(delta):
 	direction = Input.get_vector(&"move_left", &"move_right", &"move_down", &"move_up")
 	if Input.is_action_just_pressed(&"jump"):
 		jump.rpc()
-
-func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed(&"interact"):
-		interact = true
+		interact_pressed.rpc()

@@ -21,3 +21,7 @@ func _input(event):
 		return
 	if event.is_action("ui_home") and Input.is_action_just_pressed("ui_home"):
 		change_level.call_deferred(load("res://level.tscn"))
+
+
+func get_player(player_id : int) -> Player:
+	return level.get_child(0).get_node("Players").get_node(str(player_id))
