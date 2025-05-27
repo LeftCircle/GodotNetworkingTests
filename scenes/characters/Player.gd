@@ -40,8 +40,6 @@ func set_camera() -> void:
 		$Camera3D.current = true
 
 func _physics_process(delta):
-	if multiplayer.get_unique_id() != 1:
-		prints("Inputs control self =", inputs_control_self)
 	_handle_interaction()
 	if inputs_control_self:
 		_move_player(delta)
@@ -51,6 +49,8 @@ func _physics_process(delta):
 @rpc("call_local", "reliable")
 func toggle_inputs_for_self(val : bool) -> void:
 	inputs_control_self = val
+	if multiplayer.get_unique_id() != 1:
+		print("Inputs toggled for ", player, "to ", val)
 
 func _update_position_in_car():
 	if is_instance_valid(current_car):
