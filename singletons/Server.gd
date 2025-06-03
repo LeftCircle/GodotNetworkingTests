@@ -1,6 +1,7 @@
 extends Node
 const PORT = 4433
-var default_ip = "127.0.0.1"
+#var default_ip = "127.0.0.1"
+var default_ip = "100.67.72.227"
 
 # This server singleton is present on both the host and clients. It's a very
 # convienent place to put @rpc calls because you don't have to worry about
@@ -19,10 +20,19 @@ func _ready():
 	# You can save bandwidth by disabling server relay and peer notifications.
 	#multiplayer.server_relay = false
 
+	_ready_steam_multiplayer()
+
 	# Automatically start the server in headless mode.
 	if DisplayServer.get_name() == "headless":
 		print("Automatically starting dedicated server.")
 		on_host_pressed.call_deferred()
+
+func _ready_steam_multiplayer() -> void:
+	# Need to do SteamInit here
+	pass
+
+func _physics_process(delta: float) -> void:
+	Steam.run_callbacks()
 
 func on_host_pressed():
 	# Start as server.
@@ -44,6 +54,9 @@ func on_connect_pressed(ip : String = default_ip):
 		OS.alert("Failed to start multiplayer client.")
 		return
 	multiplayer.multiplayer_peer = peer
+	print("Waiting for connected to server signal")
+	await multiplayer.connected_to_server
+	print("Connected to server")
 	start_game()
 
 func _hook_up_connection_signals() -> void:
