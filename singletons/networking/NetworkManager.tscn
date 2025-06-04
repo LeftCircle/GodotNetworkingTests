@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://8yfyjhyptdws"]
+
+[ext_resource type="Script" uid="uid://cy8ctg5iuv85e" path="res://singletons/networking/network_manager.gd" id="1_ld74b"]
+
+[node name="NetworkManager" type="Node"]
+script = ExtResource("1_ld74b")
+active_network_type = 1

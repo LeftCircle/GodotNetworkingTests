@@ -17,14 +17,16 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Server="*res://singletons/Server.tscn"
 World="*res://singletons/World.tscn"
 CommandFrame="*res://singletons/CommandFrame.gd"
 Logging="*res://singletons/Logging.gd"
+SteamManager="*res://singletons/networking/steam_manager.gd"
+NetworkManager="*res://singletons/networking/NetworkManager.tscn"
 
 [file_customization]
 
 folder_colors={
+"res://ref_counted/": "orange",
 "res://resources/": "yellow",
 "res://scenes/": "green",
 "res://singletons/": "pink"

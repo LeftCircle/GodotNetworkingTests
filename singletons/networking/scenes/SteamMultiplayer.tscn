@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://duxyi0lksh1eu"]
+
+[ext_resource type="Script" uid="uid://dul734bvpew6d" path="res://singletons/networking/steam_multiplayer_interface.gd" id="1_lcfos"]
+
+[node name="SteamMultiplayer" type="Node"]
+script = ExtResource("1_lcfos")

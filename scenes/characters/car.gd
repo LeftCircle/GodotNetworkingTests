@@ -121,7 +121,7 @@ func _handle_player_entry_attempt(player_node: Player):
 func _server_assign_seat(player_id: int, seat_type: String):
 	if not multiplayer.is_server():
 		return
-	print("Players = ", Server.player_id_to_node)
+	#print("Players = ", Server.player_id_to_node)
 	var player_node = World.get_player(player_id)
 	var seat_node_target : Node3D = null
 
