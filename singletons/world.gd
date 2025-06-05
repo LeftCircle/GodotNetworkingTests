@@ -4,6 +4,9 @@ extends Node
 @export_file var starting_level_path = "res://scenes/levels/default.tscn"
 
 
+func _ready() -> void:
+	NetworkManager.game_start.connect(_on_game_start)
+
 # Call this function deferred and only on the main authority (server).
 func change_level(scene: PackedScene):
 	if not multiplayer.is_server():
@@ -25,3 +28,7 @@ func _input(event):
 
 func get_player(player_id : int) -> Player:
 	return level.get_child(0).get_node("Players").get_node(str(player_id))
+
+func _on_game_start() -> void:
+	if multiplayer.is_server():
+		change_level.call_deferred(load(World.starting_level_path))

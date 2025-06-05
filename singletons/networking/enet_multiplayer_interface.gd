@@ -17,9 +17,11 @@ func become_host():
 
 	if not OS.has_feature("dedicated_server"):
 		_add_player_to_game(1)
+	game_start.emit()
 
 func join_as_client(lobby_id):
 	print("Player 2 joining")
 
 	multiplayer_peer.create_client(SERVER_IP, SERVER_PORT)
 	multiplayer.multiplayer_peer = multiplayer_peer
+	game_start.emit()

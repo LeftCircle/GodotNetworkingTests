@@ -30,6 +30,7 @@ func set_player_id(new_id : int) -> void:
 	# Give authority over input to the appropriate peer
 	$InputSynch.set_multiplayer_authority(new_id)
 	# Keep the authority of position and simulation state to the server.
+	# TODO -> Try giving the authority of ALL things for this player to this player
 
 func _ready() -> void:
 	set_camera()

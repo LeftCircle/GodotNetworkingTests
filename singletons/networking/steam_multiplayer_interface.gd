@@ -17,11 +17,13 @@ func become_host() -> void:
 
 	Steam.lobby_joined.connect(_on_lobby_joined.bind())
 	Steam.createLobby(Steam.LOBBY_TYPE_PUBLIC)
+	game_start.emit()
 
 func join_as_client(lobby_id):
 	print("Joining lobby %s" % lobby_id)
 	Steam.lobby_joined.connect(_on_lobby_joined.bind())
 	Steam.joinLobby(int(lobby_id))
+	game_start.emit()
 
 func _on_lobby_created(connect: int, lobby_id):
 	print("On lobby created")

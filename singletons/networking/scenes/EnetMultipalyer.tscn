@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://k32bojga502p"]
+[gd_scene load_steps=2 format=3 uid="uid://k32bojga502p"]
+
+[ext_resource type="Script" uid="uid://bjra5ru7737q6" path="res://singletons/networking/enet_multiplayer_interface.gd" id="1_p3e3d"]
 
 [node name="EnetMultipalyer" type="Node"]
+script = ExtResource("1_p3e3d")
