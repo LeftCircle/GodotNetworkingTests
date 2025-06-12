@@ -3,10 +3,10 @@ class_name Car
 
 const CAR_SPEED = 120.0
 const STEER_SPEED = 2.5
-const ACCELERATION_FORCE = 150.0
-const BRAKE_FORCE = 250.0
-const FRICTION_FORCE = 3.0
-const DRAG_COEFFICIENT = 0.4
+const ACCELERATION_FORCE = 1500.0
+const BRAKE_FORCE = 2500.0
+const FRICTION_FORCE = 30.0
+const DRAG_COEFFICIENT = 0.9
 
 @export var driver : Player = null
 @export var passenger: Player = null

@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4uefgvsgiaot"]
+
+[ext_resource type="Script" uid="uid://cfuqnhxfwpfox" path="res://scenes/ui/steam/steam_hud.gd" id="1_narmv"]
+
+[node name="SteamHud" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_narmv")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.347
+anchor_top = 0.293
+anchor_right = 0.642
+anchor_bottom = 0.821
+offset_left = 0.255981
+offset_top = 0.135986
+offset_right = 0.415955
+offset_bottom = -0.00799561
+
+[node name="Options" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.188
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Host" type="Button" parent="Panel/Options"]
+custom_minimum_size = Vector2(0, 26.96)
+layout_mode = 2
+text = "Host"
+
+[node name="ListLobbies" type="Button" parent="Panel/Options"]
+layout_mode = 2
+text = "List Lobbies
+"
+
+[node name="Lobbies" type="ScrollContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.211
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LobbyVBox" type="VBoxContainer" parent="Panel/Lobbies"]
+layout_mode = 2
+
+[connection signal="pressed" from="Panel/Options/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Panel/Options/ListLobbies" to="." method="_on_list_lobbies_pressed"]

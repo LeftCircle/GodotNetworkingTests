@@ -9,7 +9,7 @@ var lobby_id: int = 0
 var lobby_max_members: int = 4
 
 func _init():
-	print("Init Steam")
+	#print("Init Steam")
 	OS.set_environment("SteamAppId", str(steam_app_id))
 	OS.set_environment("SteamGameId", str(steam_app_id))
 
@@ -17,6 +17,7 @@ func _process(delta):
 	Steam.run_callbacks()
 
 func initialize_steam():
+	print("Steam is being initialized")
 	var initialize_response: Dictionary = Steam.steamInitEx()
 	print("Did Steam Initialize?: %s " % initialize_response)
 

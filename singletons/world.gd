@@ -26,7 +26,7 @@ func _input(event):
 		change_level.call_deferred(load("res://level.tscn"))
 
 
-func get_player(player_id : int) -> Player:
+func get_player(player_id : int) -> CharacterBody3D:
 	return level.get_child(0).get_node("Players").get_node(str(player_id))
 
 func _on_game_start() -> void:

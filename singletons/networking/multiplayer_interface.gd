@@ -17,19 +17,10 @@ func become_host() -> void:
 func join_as_client(lobby_id) -> void:
 	pass
 
-# Adding and removing players is handled by the level
+## Adding and removing players is handled by the level
 func _add_player_to_game(id: int) -> void:
-	print("Player %s joined the game!" % id)
-
-	#var player_to_add = multiplayer_scene.instantiate()
-	#player_to_add.player_id = id
-	#player_to_add.name = str(id)
-
-	#_players_spawn_node.add_child(player_to_add, true)
+	Logging.peer_print("Player %s joined the game!" % id)
 
 # Adding and removing players is handled by the level
 func _del_player(id: int) -> void:
-	print("Player %s left the game!" % id)
-	#if not _players_spawn_node.has_node(str(id)):
-	#	return
-	#_players_spawn_node.get_node(str(id)).queue_free()
+	Logging.peer_print("Player %s left the game!" % id)

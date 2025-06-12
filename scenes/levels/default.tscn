@@ -53,9 +53,9 @@ surface_material_override/0 = SubResource("ShaderMaterial_sytxv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.73733, 0, 3.84882)
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("uid://ce3hq8vewaump")
+_spawnable_scenes = PackedStringArray("uid://bu0ajxvkayth8")
 spawn_path = NodePath("../Players")
-spawn_limit = 2
+spawn_limit = 3
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.817044, 0.576575, 0, -0.576575, 0.817044, 0, 3.98953, 7.68527)

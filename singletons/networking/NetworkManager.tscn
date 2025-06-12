@@ -4,3 +4,4 @@
 
 [node name="NetworkManager" type="Node"]
 script = ExtResource("1_ld74b")
+active_network_type = 1

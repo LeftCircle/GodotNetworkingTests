@@ -5,7 +5,8 @@ const SPAWN_RANDOM := 5.0
 
 # NOTE -> It might make more sense to place the player spawner in the World as
 # opposed to having each level handle spawning players.
-var preloaded_player = preload("res://scenes/characters/Player.tscn")
+#var preloaded_player = preload("res://scenes/characters/Player.tscn")
+var preloaded_player = preload("res://scenes/characters/ClientOwnedPlayer.tscn")
 
 func _ready():
 	# We only need to spawn players on the server.
@@ -19,6 +20,8 @@ func _spawn_players() -> void:
 	multiplayer.peer_disconnected.connect(del_player)
 
 	# Spawn already connected players
+	var peers = multiplayer.get_peers()
+	Logging.peer_print("Peers are %s" % peers)
 	for id in multiplayer.get_peers():
 		print("Adding already connected ", id)
 		add_player(id)
@@ -36,7 +39,7 @@ func _exit_tree():
 
 
 func add_player(id: int):
-	print("Adding player to default level: ", id)
+	Logging.peer_print("Adding player to default level: %s" % id)
 	var character = preloaded_player.instantiate()
 	# Set player id.
 	character.player = id

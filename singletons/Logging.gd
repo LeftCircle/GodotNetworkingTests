@@ -51,3 +51,6 @@ func _create_log_file():
 func log_dict_as_json(dict : Dictionary) -> void:
 	if logging_enabled:
 		log_file.store_line(JSON.new().stringify(dict))
+
+func peer_print(msg : String) -> void:
+	print(str(multiplayer.get_unique_id()) + " " + msg)

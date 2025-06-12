@@ -7,8 +7,9 @@ const LOBBY_MODE = "CoOP"
 var multiplayer_peer = SteamMultiplayerPeer.new()
 var _hosted_lobby_id = 0
 
-func ready() -> void:
+func _ready() -> void:
 	Steam.lobby_created.connect(_on_lobby_created)
+	SteamManager.initialize_steam()
 
 func become_host() -> void:
 	print("Starting lobby!")
@@ -73,6 +74,7 @@ func connect_socket(steam_id: int):
 		print("Error creating client: %s" % str(error))
 
 func list_lobbies():
+	#Steam.requestLobbyList()
 	Steam.addRequestLobbyListDistanceFilter(Steam.LOBBY_DISTANCE_FILTER_WORLDWIDE)
 	# NOTE: If you are using the test app id, you will need to apply a filter on your game name
 	# Otherwise, it may not show up in the lobby list of your clients

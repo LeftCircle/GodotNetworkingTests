@@ -1,5 +1,5 @@
 extends CharacterBody3D
-class_name Player
+#class_name Player
 
 #const Car = preload("res://scenes/characters/car.gd") # Forward declaration
 
