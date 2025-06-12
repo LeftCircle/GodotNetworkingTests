@@ -10,10 +10,10 @@ var preloaded_player = preload("res://scenes/characters/Player.tscn")
 
 func _ready():
 	# We only need to spawn players on the server.
-	if not multiplayer.is_server():
-		return
-	_spawn_players()
 	$PlayerSpawner.set_multiplayer_authority(1)
+	if multiplayer.is_server():
+		_spawn_players()
+		return
 
 
 func _spawn_players() -> void:
@@ -40,7 +40,7 @@ func _exit_tree():
 
 
 func add_player(id: int):
-	Logging.peer_print("Adding player to default level: %s" % id)
+	Logging.peer_print("Host is Adding player to default level: %s" % id)
 	var character = preloaded_player.instantiate()
 	# Set player id.
 	character.player = id
@@ -49,7 +49,6 @@ func add_player(id: int):
 	character.position = Vector3(pos.x * SPAWN_RANDOM * randf(), 0, pos.y * SPAWN_RANDOM * randf())
 	character.name = str(id)
 	$Players.add_child(character, true)
-	#Server.track_player(character)
 
 
 func del_player(id: int):
