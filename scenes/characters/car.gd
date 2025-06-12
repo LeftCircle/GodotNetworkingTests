@@ -87,7 +87,7 @@ func _on_interact_area_interact_occured(interacting_body: Node) -> void:
 
 	# Check if the current peer has authority over the interacting player.
 	if player_node.is_multiplayer_authority():
-		if multiplayer.is_server():
+		if multiplayer.get_unique_id() == 1:
 			# If the server itself is the authority for this player (e.g., server is hosting and playing),
 			# then call the handler function directly. No RPC needed.
 			_handle_player_entry_attempt(player_node)
@@ -102,7 +102,7 @@ func _on_interact_area_interact_occured(interacting_body: Node) -> void:
 
 @rpc("any_peer", "reliable")
 func server_try_enter_car(player_id: int):
-	if not multiplayer.is_server():
+	if not multiplayer.get_unique_id() == 1:
 		return
 
 	var player_node = World.get_player(player_id)
@@ -119,7 +119,7 @@ func _handle_player_entry_attempt(player_node: Player):
 		_server_assign_seat(player_node.player, "passenger")
 
 func _server_assign_seat(player_id: int, seat_type: String):
-	if not multiplayer.is_server():
+	if not multiplayer.get_unique_id() == 1:
 		return
 	#print("Players = ", Server.player_id_to_node)
 	var player_node = World.get_player(player_id)
@@ -153,7 +153,7 @@ func _server_assign_seat(player_id: int, seat_type: String):
 
 @rpc("any_peer", "reliable", "call_local")
 func server_try_exit_car(player_id: int):
-	if not multiplayer.is_server():
+	if not multiplayer.get_unique_id() == 1:
 		return
 
 	var player_node = World.get_player(player_id)
