@@ -10,14 +10,15 @@ var preloaded_player = preload("res://scenes/characters/Player.tscn")
 
 func _ready():
 	# We only need to spawn players on the server.
-	$PlayerSpawner.set_multiplayer_authority(1)
+	$PlayerSpawner.call_deferred("set_multiplayer_authority", 1)
 	if multiplayer.is_server():
-		_spawn_players()
+		_host_spawn_players()
 		return
 
 
-func _spawn_players() -> void:
-	multiplayer.peer_connected.connect(add_player)
+func _host_spawn_players() -> void:
+	assert(multiplayer.is_server())
+	multiplayer.peer_connected.connect(_host_add_player)
 	multiplayer.peer_disconnected.connect(del_player)
 
 	# Spawn already connected players
@@ -25,21 +26,21 @@ func _spawn_players() -> void:
 	Logging.peer_print("Peers are %s" % peers)
 	for id in multiplayer.get_peers():
 		print("Adding already connected ", id)
-		add_player(id)
+		_host_add_player(id)
 
 	# Spawn the local player unless this is a dedicated server export.
 	if not OS.has_feature("dedicated_server"):
 		var id = multiplayer.get_unique_id()
-		add_player(id)
+		_host_add_player(id)
 
 func _exit_tree():
-	if not multiplayer.is_server():
-		return
-	multiplayer.peer_connected.disconnect(add_player)
-	multiplayer.peer_disconnected.disconnect(del_player)
+	if multiplayer.is_server():
+		multiplayer.peer_connected.disconnect(_host_add_player)
+		multiplayer.peer_disconnected.disconnect(del_player)
 
 
-func add_player(id: int):
+func _host_add_player(id: int):
+	assert(multiplayer.is_server())
 	Logging.peer_print("Host is Adding player to default level: %s" % id)
 	var character = preloaded_player.instantiate()
 	# Set player id.

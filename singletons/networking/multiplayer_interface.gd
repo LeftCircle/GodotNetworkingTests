@@ -19,6 +19,7 @@ func join_as_client(lobby_id) -> void:
 
 ## Adding and removing players is handled by the level
 func _add_player_to_game(id: int) -> void:
+	assert(multiplayer.is_server())
 	Logging.peer_print("Player %s joined the game!" % id)
 
 # Adding and removing players is handled by the level
