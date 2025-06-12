@@ -12,7 +12,6 @@ func _on_host_pressed() -> void:
 	print("On host pressed")
 	NetworkManager.become_host()
 
-
 func _on_list_lobbies_pressed() -> void:
 	print("List lobbies pressed")
 	NetworkManager.list_lobbies()
