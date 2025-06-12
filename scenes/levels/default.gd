@@ -5,8 +5,8 @@ const SPAWN_RANDOM := 5.0
 
 # NOTE -> It might make more sense to place the player spawner in the World as
 # opposed to having each level handle spawning players.
-#var preloaded_player = preload("res://scenes/characters/Player.tscn")
-var preloaded_player = preload("res://scenes/characters/ClientOwnedPlayer.tscn")
+var preloaded_player = preload("res://scenes/characters/Player.tscn")
+#var preloaded_player = preload("res://scenes/characters/ClientOwnedPlayer.tscn")
 
 func _ready():
 	# We only need to spawn players on the server.

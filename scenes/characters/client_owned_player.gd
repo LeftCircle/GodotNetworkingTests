@@ -1,5 +1,5 @@
 extends CharacterBody3D
-class_name Player
+#class_name Player
 
 #const Car = preload("res://scenes/characters/car.gd") # Forward declaration
 
@@ -32,7 +32,7 @@ func set_player_id(new_id : int) -> void:
 	_set_owner.call_deferred()
 
 func _set_owner() -> void:
-	set_multiplayer_authority(player)
+	set_multiplayer_authority(player, true)
 	Logging.peer_print("Player, %s Set to own its own character" % [player])
 
 func _ready() -> void:
