@@ -13,6 +13,7 @@ func _ready():
 	if not multiplayer.is_server():
 		return
 	_spawn_players()
+	$PlayerSpawner.set_multiplayer_authority(1)
 
 
 func _spawn_players() -> void:
